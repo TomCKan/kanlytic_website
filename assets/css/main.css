@@ -3959,3 +3959,17 @@ input, select, textarea {
         white-space: normal;
     }
 }
+
+/* Fix long buttons on mobile */
+@media screen and (max-width: 736px) {
+    .button,
+    button,
+    input[type="submit"],
+    input[type="button"],
+    input[type="reset"] {
+        white-space: normal;
+        height: auto;
+        line-height: 1.4em;
+        padding: 1em 1.5em;
+    }
+}
