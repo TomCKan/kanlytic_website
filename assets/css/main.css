@@ -3602,7 +3602,7 @@ input, select, textarea {
 			#main > * > .inner {
 				padding: 4em 0 2em 0 ;
 				margin: 0 auto;
-				max-width: 65em;
+				max-width: 50em;
 				width: calc(100% - 6em);
 			}
 
@@ -3990,4 +3990,16 @@ header.major.special-color h1 {
 }
 div.content.special-color {
     color: #001835;
+}
+
+/* banner logo addition */
+.logo-title {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* space between logo and text */
+}
+
+.logo {
+    height: 90px; /* adjust size as needed */
+    width: auto;
 }
