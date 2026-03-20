@@ -1,0 +1,485 @@
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  * { font-family: 'Source Sans 3', sans-serif !important; }
+  body { font-family: var(--font-sans); }
+  .audit-wrap { max-width: 680px; margin: 0 auto; padding: 1.5rem 1rem; }
+  .progress-bar { height: 4px; background: var(--color-border-tertiary); border-radius: 2px; margin-bottom: 0.5rem; }
+  .progress-fill { height: 100%; background: #1D9E75; border-radius: 2px; transition: width 0.4s ease; }
+  .q-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 1.5rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .q-text { font-size: 19px; font-weight: 500; color: var(--color-text-primary); line-height: 1.4; margin-bottom: 0.4rem; }
+  .q-sub { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 1.5rem; line-height: 1.5; }
+  .options-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
+  .opt { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .opt:hover { border-color: #1D9E75; background: var(--color-background-secondary); }
+  .opt.selected { border-color: #1D9E75; background: #E1F5EE; }
+  .opt-radio { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--color-border-secondary); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: border-color 0.15s; }
+  .opt.selected .opt-radio { border-color: #1D9E75; background: #1D9E75; }
+  .opt-dot { width: 8px; height: 8px; border-radius: 50%; background: white; display: none; }
+  .opt.selected .opt-dot { display: block; }
+  .opt-check { width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid var(--color-border-secondary); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: border-color 0.15s, background 0.15s; }
+  .opt.selected .opt-check { border-color: #1D9E75; background: #1D9E75; }
+  .check-mark { color: white; font-size: 11px; display: none; }
+  .opt.selected .check-mark { display: block; }
+  .opt-label { font-size: 15px; color: var(--color-text-primary); line-height: 1.4; }
+  .opt-desc { font-size: 13px; color: var(--color-text-secondary); margin-top: 2px; }
+  .btn-row { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; }
+  .btn { padding: 11px 24px; border-radius: var(--border-radius-md); font-size: 15px; cursor: pointer; transition: opacity 0.15s, transform 0.1s; font-family: var(--font-sans); }
+  .btn:active { transform: scale(0.98); }
+  .btn-back { background: transparent; border: 0.5px solid var(--color-border-secondary); color: var(--color-text-secondary); }
+  .btn-next { background: #1D9E75; border: none; color: white; font-weight: 500; }
+  .btn-next:disabled { opacity: 0.4; cursor: default; }
+  .text-input { width: 100%; padding: 12px 14px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); font-size: 15px; font-family: var(--font-sans); color: var(--color-text-primary); background: var(--color-background-primary); outline: none; transition: border-color 0.15s; }
+  .text-input:focus { border-color: #1D9E75; }
+  select.text-input { cursor: pointer; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width: 480px) { .two-col { grid-template-columns: 1fr; } }
+  .gate-box { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.5rem; background: var(--color-background-secondary); margin-bottom: 1rem; }
+  .score-ring { display: flex; flex-direction: column; align-items: center; margin: 1rem 0; }
+  .result-section { margin-bottom: 1.25rem; }
+  .result-section h3 { font-size: 14px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+  .pill { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; margin: 3px; }
+  .pill-green { background: #E1F5EE; color: #0F6E56; }
+  .pill-amber { background: #FAEEDA; color: #633806; }
+  .pill-red { background: #FCEBEB; color: #791F1F; }
+  .blur-overlay { position: relative; }
+  .blur-content { filter: blur(5px); pointer-events: none; user-select: none; }
+  .blur-cta { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 2; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-lg); padding: 1.25rem 1.5rem; width: 85%; box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+  .dim-bar { height: 10px; border-radius: 4px; background: var(--color-border-tertiary); margin: 4px 0; }
+  .brand-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #1D9E75; margin-right: 6px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+</style>
+
+<div class="audit-wrap" id="app">
+  <div style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px;">
+    <img src="images/KanlyticLogoWhite-NavyBackground500x500.png" style="height:45px;width:auto;vertical-align:middle;" alt="logo">
+    <span style="font-size: 13px; font-weight: 500; color: var(--color-text-secondary); letter-spacing: 0.04em;">DATA MATURITY AUDIT</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:10%"></div></div>
+  <p class="q-label" id="q-counter">Question 1 of 10</p>
+  <div id="q-area"></div>
+</div>
+
+<script>
+const questions = [
+  {
+    id:'industry', type:'select', required:true,
+    text:'What industry are you in?',
+    sub:'This helps us tailor your results to sector-specific benchmarks.',
+    options:['Retail & e-commerce','Professional services','Healthcare & social care','Hospitality & leisure','Construction & property','Charity & non-profit','Manufacturing','Education','Financial services','Tech & SaaS','Other']
+  },
+  {
+    id:'role', type:'radio', required:true,
+    text:'What is your role within the business?',
+    sub:'We use this to frame recommendations that are relevant to your responsibilities.',
+    options:['Owner / Director','Operations Manager','Finance Manager','Marketing / Commercial Lead','IT Manager','Data or Analytics Lead','Other']
+  },
+  {
+    id:'size', type:'radio', required:true,
+    text:'How large is your organisation?',
+    sub:'Our recommendations are scaled to team size; what works for 10 people differs from what works for 200.',
+    options:['1–10 employees','11–50 employees','51–200 employees','201–500 employees','500+ employees']
+  },
+  {
+    id:'datateam', type:'radio', required:true,
+    text:'Do you have a dedicated IT or data function?',
+    sub:'This tells us how much internal capacity exists to own any changes after a project.',
+    options:['Yes - a dedicated team or person','Partly - someone covers it alongside another role','No - it falls on whoever is available','We outsource it entirely']
+  },
+  {
+    id:'datastorage', type:'multi', required:true,
+    text:'Where does your business data currently live?',
+    sub:'Select all that apply. Think about CRM, finance, sales, HR, and operational data.',
+    options:['Spreadsheets (Excel / Google Sheets)','Cloud platforms (e.g. Salesforce, HubSpot, Xero)','On-premise databases or servers','Paper records / shared drives','Multiple disconnected systems','We\'re not entirely sure']
+  },
+  {
+    id:'reporting', type:'radio', required:true,
+    text:'How would you describe your current reporting and decision-making?',
+    sub:'Be honest, most businesses are use less data than they\'d like to admit.',
+    options:['We rarely look at data to make decisions','We use spreadsheets and manual reports but it takes time','We have dashboards but people don\'t trust or use them','We have good reporting but insight is limited','Our data drives confident decisions across the business']
+  },
+  {
+    id:'painpoints', type:'multi', required:true,
+    text:'Which of these feel familiar in your organisation?',
+    sub:'Select all that apply. These are more common than you might think, and all are solvable.',
+    options:[
+      'We produce reports that nobody acts on',
+      'We find out about problems weeks after they happen',
+      'Our data is split across systems that don\'t connect',
+      'We can\'t clearly see profitability by product, customer, or channel',
+      'We spend hours manually compiling reports each week',
+      'People in meetings question whether the figures are correct',
+      'We don\'t know if AI tools could save us time',
+      'Our forecasts are consistently too high or too low'
+    ]
+  },
+  {
+    id:'biggestproblem', type:'radio', required:true,
+    text:'If you had to pick one, what is the single biggest data challenge right now?',
+    sub:'There\'s no wrong answer, this is about where the pain is most acute.',
+    options:[
+      'Getting reliable, clean data I can trust',
+      'Turning data into useful reports and dashboards',
+      'Understanding what the data is actually telling me',
+      'Automating or reducing manual data work',
+      'Convincing leadership to act on data',
+      'Knowing whether our current tools are the right ones'
+    ]
+  },
+  {
+    id:'priority', type:'radio', required:true,
+    text:'What outcome would matter most to your organisation in the next 12 months?',
+    sub:'Think about what a win would look like for you personally as well as the business.',
+    options:[
+      'Reduce hours spent on manual data tasks',
+      'Cut costs through better ROI oversight',
+      'Grow revenue through better decisions',
+      'Reduce risk by improving accuracy and data confidence',
+      'Produce reports that impress stakeholders and grow trust'
+    ]
+  },
+  {
+    id:'awareness', type:'radio', required:true,
+    text:'How would you describe your team\'s overall data confidence?',
+    sub:'This helps us assess readiness for change and what kind of support would be most valuable.',
+    options:[
+      'Low - most people avoid data wherever possible',
+      'Mixed - a few people get it, most don\'t',
+      'Moderate - people use data but don\'t always trust it',
+      'Good - data is part of how decisions get made',
+      'Strong - we have a data-driven culture'
+    ]
+  }
+];
+
+let current = 0;
+let answers = {};
+
+function getDims() {
+  const reportingMap = {
+    'We rarely look at data to make decisions': 0,
+    'We use spreadsheets and manual reports but it takes time': 25,
+    'We have dashboards but people don\'t trust or use them': 45,
+    'We have good reporting but insight is limited': 65,
+    'Our data drives confident decisions across the business': 90
+  };
+  const awarenessMap = {
+    'Low - most people avoid data wherever possible': 0,
+    'Mixed - a few get it, most don\'t': 25,
+    'Moderate - data is used but not always trusted': 45,
+    'Good - data is part of how decisions get made': 70,
+    'Strong - we have a data-driven culture': 90
+  };
+  const datateamMap = {
+    'No - it falls on whoever is available': 10,
+    'We outsource it entirely': 30,
+    'Partly - someone covers it alongside another role': 55,
+    'Yes - a dedicated team or person': 85
+  };
+
+  const ds = Array.isArray(answers.datastorage) ? answers.datastorage : [];
+  let infra = 50;
+  if (ds.includes("We're not entirely sure")) infra = 10;
+  else if (ds.includes('Multiple disconnected systems')) infra = 30;
+  else if (ds.includes('Cloud platforms (e.g. Salesforce, HubSpot, Xero)')) infra = 75;
+
+  const pp = Array.isArray(answers.painpoints) ? answers.painpoints : [];
+  const proc = Math.max(5, Math.round(100 - pp.length * 12));
+
+  return [
+    { label: 'Reporting quality',    val: reportingMap[answers.reporting] ?? 30 },
+    { label: 'Decision confidence',  val: awarenessMap[answers.awareness] ?? 30 },
+    { label: 'Data infrastructure',  val: infra },
+    { label: 'Process efficiency',   val: proc },
+    { label: 'Team & capacity',      val: datateamMap[answers.datateam] ?? 30 }
+  ];
+}
+
+function scoreAnswers() {
+  const dims = getDims();
+  const avg = dims.reduce((sum, d) => sum + d.val, 0) / dims.length;
+  return Math.min(Math.round(avg), 98);
+}
+
+function getMaturityLevel(pct) {
+  if (pct < 30) return { label:'Reactive', color:'#E24B4A', desc:'Data is largely ad hoc. Decisions rely on instinct and there is significant time lost to manual processes.' };
+  if (pct < 55) return { label:'Developing', color:'#BA7517', desc:'Some processes exist but reporting is inconsistent. There is clear untapped value waiting to be unlocked.' };
+  if (pct < 75) return { label:'Structured', color:'#1D9E75', desc:'Good foundations are in place. Targeted improvements to insight and automation would deliver strong returns.' };
+  return { label:'Advanced', color:'#185FA5', desc:'Strong data capability. Focus now on forecasting, AI opportunities, and strategic advantage.' };
+}
+
+function getServices(r) {
+  const services = [];
+  const pain = Array.isArray(r.painpoints) ? r.painpoints : [];
+  if (pain.includes('Our data is split across systems that don\'t connect')) services.push('Data integration & consolidation');
+  if (pain.includes('People in meetings question whether the figures are correct')) services.push('Data quality audit & cleaning');
+  if (pain.includes('We produce reports that nobody acts on') || pain.includes('We spend hours manually compiling reports each week')) services.push('Dashboard & reporting redesign');
+  if (pain.includes('We find out about problems weeks after they happen')) services.push('KPI monitoring & live alerts');
+  if (pain.includes('We can\'t clearly see profitability by product, customer, or channel')) services.push('Customer & revenue analytics');
+  if (pain.includes('Our forecasts are consistently too high or too low')) services.push('Sales & revenue forecasting');
+  if (pain.includes('We spend hours manually compiling reports each week')) services.push('Workflow & reporting automation');
+  if (pain.includes('We don\'t know if AI tools could save us time')) services.push('AI opportunity assessment');
+  const big = r.biggestproblem || '';
+  if (big.includes('turning data') && !services.includes('Dashboard & reporting redesign')) services.push('Dashboard & reporting redesign');
+  if (big.includes('reliable, clean') && !services.includes('Data quality audit & cleaning')) services.push('Data quality audit & cleaning');
+  return [...new Set(services)].slice(0,5);
+}
+
+function getQuickWins(r) {
+  const wins = [];
+  const pain = Array.isArray(r.painpoints) ? r.painpoints : [];
+  if (pain.includes('We spend hours manually compiling reports each week')) wins.push('Automate your weekly reporting - often saves 3–5 hours per week immediately');
+  if (pain.includes('People in meetings question whether the figures are correct')) wins.push('A one-day data quality audit typically surfaces 3–5 fixable issues causing mistrust');
+  if (pain.includes('Our data is split across systems that don\'t connect')) wins.push('Connecting your top 2–3 data sources removes the need for manual file merging');
+  if (wins.length === 0) wins.push('Mapping your key data sources and owners is a low-cost, high-impact first step');
+  return wins.slice(0,2);
+}
+
+function renderQ() {
+  const q = questions[current];
+  const pct = Math.round(((current) / questions.length) * 100);
+  document.getElementById('prog').style.width = (pct + 10) + '%';
+  document.getElementById('q-counter').textContent = `Question ${current + 1} of ${questions.length}`;
+  const area = document.getElementById('q-area');
+  const val = answers[q.id];
+  let optsHtml = '';
+  if (q.type === 'select') {
+    optsHtml = `<select class="text-input" id="sel-main" onchange="answers['${q.id}']=this.value; checkBtn();" style="margin-bottom:1.5rem;">
+      <option value="">- Select your industry -</option>
+      ${q.options.map(o=>`<option value="${o}" ${val===o?'selected':''}>${o}</option>`).join('')}
+    </select>`;
+  } else if (q.type === 'radio') {
+    optsHtml = `<div class="options-grid">${q.options.map(o=>`
+      <div class="opt ${val===o?'selected':''}" onclick="selectRadio('${q.id}','${o.replace(/'/g,"\\'")}',this)">
+        <div class="opt-radio"><div class="opt-dot"></div></div>
+        <div><div class="opt-label">${o}</div></div>
+      </div>`).join('')}</div>`;
+  } else if (q.type === 'multi') {
+    const arr = Array.isArray(val) ? val : [];
+    optsHtml = `<div class="options-grid" id="multi-${q.id}">${q.options.map(o=>`
+      <div class="opt ${arr.includes(o)?'selected':''}" onclick="toggleMulti('${q.id}','${o.replace(/'/g,"\\'")}',this)">
+        <div class="opt-check"><span class="check-mark">✓</span></div>
+        <div><div class="opt-label">${o}</div></div>
+      </div>`).join('')}</div>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin-top:4px;">Select all that apply</p>`;
+  }
+  area.innerHTML = `
+    <h2 class="q-text">${q.text}</h2>
+    <p class="q-sub">${q.sub}</p>
+    ${optsHtml}
+    <div class="btn-row">
+      ${current > 0 ? `<button class="btn btn-back" onclick="goBack()">← Back</button>` : `<span></span>`}
+      <button class="btn btn-next" id="btn-next" onclick="goNext()" ${!val && q.required ? 'disabled' : ''}>${current < questions.length - 1 ? 'Continue →' : 'See my results →'}</button>
+    </div>`;
+}
+
+function selectRadio(id, val, el) {
+  answers[id] = val;
+  document.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  checkBtn();
+}
+
+function toggleMulti(id, val, el) {
+  if (!Array.isArray(answers[id])) answers[id] = [];
+  const idx = answers[id].indexOf(val);
+  if (idx > -1) { answers[id].splice(idx, 1); el.classList.remove('selected'); }
+  else { answers[id].push(val); el.classList.add('selected'); }
+  checkBtn();
+}
+
+function checkBtn() {
+  const q = questions[current];
+  const val = answers[q.id];
+  const btn = document.getElementById('btn-next');
+  if (!btn) return;
+  const valid = Array.isArray(val) ? val.length > 0 : !!val;
+  btn.disabled = q.required && !valid;
+}
+
+function goNext() {
+  const q = questions[current];
+  const val = answers[q.id];
+  const valid = Array.isArray(val) ? val.length > 0 : !!val;
+  if (q.required && !valid) return;
+  if (current < questions.length - 1) { current++; renderQ(); window.scrollTo(0,0); }
+  else showGate();
+}
+
+function goBack() {
+  if (current > 0) { current--; renderQ(); }
+}
+
+function showGate() {
+  const score = scoreAnswers();
+  const level = getMaturityLevel(score);
+  const services = getServices(answers);
+  const area = document.getElementById('q-area');
+  document.getElementById('prog').style.width = '100%';
+  document.getElementById('q-counter').textContent = 'Audit complete';
+  area.innerHTML = `
+    <h2 class="q-text" style="margin-bottom:0.5rem;">Your results are ready</h2>
+    <p class="q-sub" style="margin-bottom:1.25rem;">We've assessed your data maturity across 5 dimensions. Enter your details below to unlock the full report - including a personalised action plan.</p>
+    <div class="gate-box" style="margin-bottom:1rem;">
+      <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+        <div style="flex-shrink:0;">
+          <svg width="72" height="72" viewBox="0 0 72 72">
+            <circle cx="36" cy="36" r="30" fill="none" stroke="var(--color-border-tertiary)" stroke-width="6"/>
+            <circle cx="36" cy="36" r="30" fill="none" stroke="${level.color}" stroke-width="6"
+              stroke-dasharray="${Math.round(score * 1.885)} 188.5" stroke-linecap="round" transform="rotate(-90 36 36)"/>
+            <text x="36" y="34" text-anchor="middle" font-size="16" font-weight="500" fill="var(--color-text-primary)" font-family="var(--font-sans)">${score}</text>
+            <text x="36" y="47" text-anchor="middle" font-size="9" fill="var(--color-text-secondary)" font-family="var(--font-sans)">/ 100</text>
+          </svg>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px;">Maturity level</div>
+          <div style="font-size:20px;font-weight:500;color:${level.color};margin-bottom:4px;">${level.label}</div>
+          <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.5;">${level.desc}</div>
+        </div>
+      </div>
+      <div style="border-top:0.5px solid var(--color-border-tertiary);padding-top:0.75rem;">
+        <div style="font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;">Your top opportunity areas</div>
+        <div class="tag-row">${services.slice(0,3).map(s=>`<span class="pill pill-green">${s}</span>`).join('')}
+        <span class="pill" style="background:var(--color-background-secondary);color:var(--color-text-secondary);">+${Math.max(0,services.length-3)} more</span></div>
+      </div>
+    </div>
+    <div class="blur-overlay">
+      <div class="blur-content">
+        <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem;margin-bottom:0.75rem;">
+          <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;">Your full maturity breakdown</div>
+          ${['Data infrastructure','Reporting quality','Decision confidence','Process efficiency','Team capability'].map((d,i)=>{
+            const w = [35,55,45,30,60][i];
+            return `<div style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--color-text-secondary);margin-bottom:3px;"><span>${d}</span><span>${w}%</span></div><div style="height:6px;background:var(--color-border-tertiary);border-radius:3px;"><div style="width:${w}%;height:100%;background:#1D9E75;border-radius:3px;"></div></div></div>`;
+          }).join('')}
+        </div>
+        <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem;">
+          <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;">Personalised action plan</div>
+          ${[1,2,3].map(n=>`<div class="dim-bar" style="width:${[90,70,55][n-1]}%"></div>`).join('')}
+        </div>
+      </div>
+      <div class="blur-cta">
+        <div style="font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;">Unlock your full report</div>
+        <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem;">Get your personalised action plan, dimension breakdown, and recommended next steps - free.</div>
+        <input type="text" class="text-input" placeholder="Your name" id="gate-name" style="margin-bottom:8px;" />
+        <input type="email" class="text-input" placeholder="Work email address" id="gate-email" style="margin-bottom:8px;" />
+        <label style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--color-text-secondary);margin-bottom:12px;cursor:pointer;">
+          <input type="checkbox" id="gate-consent" style="margin-top:2px;flex-shrink:0;" />
+          I'm happy to receive occasional insights and resources from the team
+        </label>
+        <button class="btn btn-next" style="width:100%;justify-content:center;" onclick="unlockReport()">See my full report →</button>
+      </div>
+    </div>`;
+}
+
+async function unlockReport() {
+  const name = document.getElementById('gate-name').value.trim();
+  const email = document.getElementById('gate-email').value.trim();
+  const consent = document.getElementById('gate-consent').checked;
+
+  if (!name || !email || !email.includes('@') || !document.getElementById('gate-consent').checked) {
+    alert('Please enter your name, a valid email address, and tick the box to continue.');
+    return;
+  }
+
+  // Collect everything useful to send
+  const payload = {
+    name,
+    email,
+    consent: consent ? 'Yes' : 'No',
+    industry: answers.industry || '',
+    role: answers.role || '',
+    size: answers.size || '',
+    datateam: answers.datateam || '',
+    datastorage: (answers.datastorage || []).join(', '),
+    reporting: answers.reporting || '',
+    painpoints: (answers.painpoints || []).join(', '),
+    biggestchallenge: answers.biggestproblem || '',
+    priority: answers.priority || '',
+    teamconfidence: answers.awareness || '',
+    score: scoreAnswers(),
+    maturitylevel: getMaturityLevel(scoreAnswers()).label
+  };
+
+  try {
+    const res = await fetch('https://formspree.io/f/xvzwywdp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      showFullReport(name); // only show report on success
+    } else {
+      alert('Something went wrong submitting your details. Please try again.');
+    }
+  } catch (err) {
+    alert('Could not connect. Please check your internet connection and try again.');
+  }
+}
+
+function showFullReport(name) {
+  const score = scoreAnswers();
+  const level = getMaturityLevel(score);
+  const services = getServices(answers);
+  const wins = getQuickWins(answers);
+  const dims = [
+    { label:'Data infrastructure', val: answers.datastorage && !answers.datastorage.includes("We're not entirely sure") ? 55 : 25 },
+    { label:'Reporting quality', val: {0:10,1:30,2:45,3:65,4:85}[['We rarely look at data to make decisions','We use spreadsheets and manual reports but it takes time','We have dashboards but people don\'t trust or use them','We have good reporting but insight is limited','Our data drives confident decisions across the business'].indexOf(answers.reporting)] || 35 },
+    { label:'Decision confidence', val: {0:10,1:25,2:45,3:65,4:85}[['Low - most people avoid data wherever possible','Mixed - a few people get it, most don\'t','Moderate - people use data but don\'t always trust it','Good - data is part of how decisions get made','Strong - we have a data-driven culture'].indexOf(answers.awareness)] || 40 },
+    { label:'Process efficiency', val: (Array.isArray(answers.painpoints) ? Math.max(10, 80 - answers.painpoints.length * 9) : 50) },
+    { label:'Team capability', val: {'Yes - a dedicated team or person':75,'Partly - someone covers it alongside another role':50,'No - it falls on whoever is available':25,'We outsource it entirely':40}[answers.datateam] || 40 }
+  ];
+  const area = document.getElementById('q-area');
+  area.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;">
+      <svg width="56" height="56" viewBox="0 0 56 56">
+        <circle cx="28" cy="28" r="22" fill="none" stroke="var(--color-border-tertiary)" stroke-width="5"/>
+        <circle cx="28" cy="28" r="22" fill="none" stroke="${level.color}" stroke-width="5"
+          stroke-dasharray="${Math.round(score * 1.382)} 138.2" stroke-linecap="round" transform="rotate(-90 28 28)"/>
+        <text x="28" y="26" text-anchor="middle" font-size="13" font-weight="500" fill="var(--color-text-primary)" font-family="var(--font-sans)">${score}</text>
+        <text x="28" y="37" text-anchor="middle" font-size="8" fill="var(--color-text-secondary)" font-family="var(--font-sans)">/ 100</text>
+      </svg>
+      <div>
+        <div style="font-size:11px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.04em;">Your data maturity score</div>
+        <div style="font-size:22px;font-weight:500;color:${level.color};">${level.label}</div>
+      </div>
+    </div>
+    <p style="font-size:15px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:1.5rem;">Hi ${name}. ${level.desc} Here's a breakdown of how your organisation scores across five key dimensions.</p>
+
+    <div class="result-section">
+      <h3>Dimension breakdown</h3>
+      ${dims.map(d=>`
+        <div style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;">
+            <span style="color:var(--color-text-primary);">${d.label}</span>
+            <span style="color:${d.val<40?'#E24B4A':d.val<65?'#BA7517':'#1D9E75'};font-weight:500;">${d.val}%</span>
+          </div>
+          <div style="height:7px;background:var(--color-background-secondary);border-radius:4px;border:0.5px solid var(--color-border-tertiary);">
+            <div style="width:${d.val}%;height:100%;background:${d.val<40?'#E24B4A':d.val<65?'#BA7517':'#1D9E75'};border-radius:4px;transition:width 0.6s ease;"></div>
+          </div>
+        </div>`).join('')}
+    </div>
+
+    <div class="result-section">
+      <h3>Quick wins - where to start</h3>
+      ${wins.map(w=>`<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;padding:12px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);">
+        <span style="color:#1D9E75;font-size:14px;margin-top:1px;flex-shrink:0;">→</span>
+        <span style="font-size:14px;color:var(--color-text-primary);line-height:1.5;">${w}</span>
+      </div>`).join('')}
+    </div>
+
+    <div class="result-section">
+      <h3>Recommended focus areas</h3>
+      <div class="tag-row" style="margin-bottom:0.75rem;">${services.map(s=>`<span class="pill pill-green">${s}</span>`).join('')}</div>
+      <p style="font-size:13px;color:var(--color-text-secondary);line-height:1.5;">These are the areas where targeted work is most likely to save time, reduce cost, or improve decision quality based on what you've shared.</p>
+    </div>
+
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.25rem;border:0.5px solid var(--color-border-tertiary);margin-top:1rem;">
+      <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;">Want to explore this further?</div>
+      <p style="font-size:13px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:1rem;">A free 30-minute discovery call is the fastest way to understand what's possible and what it would take. No commitment, no jargon.</p>
+      <button class="btn btn-next" onclick="sendPrompt('I just completed the data maturity audit and scored ${score}/100 (${level.label}). I\\'d like to discuss what the results mean and explore next steps.')">Book a free discovery call ↗</button>
+    </div>`;
+}
+
+renderQ();
+</script>
