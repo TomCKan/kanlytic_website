@@ -1,0 +1,457 @@
+.dp-page {
+	/* Neutral light backgrounds */
+	--dp-bg-1: #ffffff;
+	--dp-bg-2: #f8f9fa;
+	--dp-bg-3: #f1f3f5;
+	--dp-bg-4: #ffffff;
+
+	/* Product accent colours */
+	--dp-accent: #052245;
+	--dp-accent-light: #133053;
+	--dp-accent-active: #001835;
+
+	/* Text */
+	--dp-text: #1b1b1b;
+	--dp-text-soft: rgba(27,27,27,0.68);
+
+	/* Accent RGB value for rgba() */
+	--dp-accent-rgb: 5,34,69;
+}
+
+/* ============ Placeholder image slots ============
+   Swap these out: replace the <img> src, or delete the
+   .dp-placeholder wrapper entirely once you drop in real art. */
+
+.dp-placeholder {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(135deg, var(--dp-bg-3), var(--dp-bg-4));
+	border: 1px dashed rgba(255,255,255,0.25);
+	border-radius: 6px;
+	overflow: hidden;
+	min-height: 220px;
+	color: var(--dp-text-soft);
+	text-align: center;
+	font-size: 0.8em;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+	.dp-placeholder span {
+		padding: 1em;
+	}
+
+	.dp-placeholder img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.dp-placeholder.dp-hero-shot { aspect-ratio: 16 / 10; }
+	.dp-placeholder.dp-spot-shot { aspect-ratio: 4 / 3; }
+
+/* ============ Hero ============ */
+
+#dp-hero {
+	background-color: var(--dp-bg-1);
+	padding: 5em 0 6em 0;
+}
+
+	.dp-hero-inner {
+		display: flex;
+		align-items: center;
+		gap: 4em;
+		max-width: 100em;
+		margin: 0 auto;
+		padding: 0 3em;
+	}
+
+	.dp-hero-copy { flex: 0 0 46%; min-width: 0; }
+	.dp-hero-art { flex: 1; min-width: 0; }
+
+	/* Guard against a raw <img> being dropped in without its own sizing —
+	   keeps it from overflowing its box and overlapping neighboring content. */
+	.dp-hero-art img {
+		display: block;
+		width: 100%;
+		height: auto;
+		max-width: 100%;
+	}
+
+	.dp-eyebrow {
+		display: inline-block;
+		font-size: 0.9em;
+		font-weight: 600;
+		letter-spacing: 0.25em;
+		color: var(--dp-accent-light);
+		margin-bottom: 1em;
+	}
+
+	#dp-hero h1 {
+		font-size: 2.75em;
+		font-weight: 300;
+		line-height: 1.15;
+		margin-bottom: 0.4em;
+	}
+
+	#dp-hero .dp-hero-copy > p {
+		color: var(--dp-text-soft);
+		font-size: 1.15em;
+		margin-bottom: 1.75em;
+	}
+
+@media screen and (max-width: 980px) {
+	#dp-hero { padding: 6em 0 3em 0; overflow-x: hidden; }
+	.dp-hero-inner { flex-direction: column; gap: 2.5em; padding: 0 2em; }
+	.dp-hero-copy, .dp-hero-art { flex: 1 1 auto; width: 100%; max-width: 100%; }
+}
+
+@media screen and (max-width: 736px) {
+	#dp-hero { padding: 6.5em 0 2.5em 0; }
+	.dp-hero-inner { padding: 0 1.5em; gap: 2em; }
+	#dp-hero h1 { font-size: 2em; }
+	.dp-placeholder.dp-hero-shot { min-height: 160px; }
+}
+
+/* ============ Logo strip ============ */
+
+#dp-logos {
+	background-color: var(--dp-bg-2);
+	padding: 3em;
+	text-align: center;
+}
+
+	#dp-logos p {
+		font-size: 0.7em;
+		font-weight: 600;
+		letter-spacing: 0.25em;
+		text-transform: uppercase;
+		color: var(--dp-text-soft);
+		margin-bottom: 2em;
+	}
+
+	.dp-logo-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 3em;
+		max-width: 90em;
+		margin: 0 auto;
+	}
+
+	.dp-logo-row .dp-logo-slot {
+		width: 9em;
+		height: 2.6em;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--dp-text-soft);
+		border: 1px dashed rgba(255,255,255,0.2);
+		border-radius: 4px;
+		font-size: 0.75em;
+		letter-spacing: 0.05em;
+	}
+
+	.dp-logo-row .dp-logo-slot img {
+		max-width: 100%;
+		max-height: 100%;
+	}
+
+/* ============ Feature grid ============ */
+
+#dp-features {
+	background-color: var(--dp-bg-3);
+	padding: 3em 2em;
+}
+
+	.dp-section-head {
+		max-width: 55em;
+		margin: 0 auto 3.5em auto;
+		text-align: center;
+	}
+
+	.dp-section-head h2 {
+		font-size: 1.75em;
+		font-weight: 300;
+		margin-bottom: 0.5em;
+		text-align: center;
+	}
+
+	.dp-section-head p {
+		text-align: left!important;
+		color: var(--dp-text-soft);
+	}
+
+	.dp-section-head-two p {
+		text-align: center;
+		color: var(--dp-text-soft);
+	}
+
+	.dp-feature-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2.5em;
+		max-width: 90em;
+		margin: 0 auto;
+	}
+
+	.dp-feature-grid.dp-feature-grid-4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+
+	.dp-feature {
+		background-color: rgba(255, 255, 255, 0.902);
+		border: 1px solid rgba(52, 51, 51, 0.178);
+		border-radius: 6px;
+		padding: 2.25em 2em;
+	}
+
+	.dp-feature .dp-icon {
+		width: 2.75em;
+		height: 2.75em;
+		border-radius: 50%;
+		background-color: rgba(var(--dp-accent-rgb), 0.15);
+		color: var(--dp-accent-light);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 1.25em;
+		font-size: 1.1em;
+	}
+
+	.dp-feature h3 {
+		font-size: 1.1em;
+		font-weight: 600;
+		margin-bottom: 0.5em;
+	}
+
+	.dp-feature p {
+		color: var(--dp-text-soft);
+		font-size: 0.95em;
+	}
+
+@media screen and (max-width: 980px) {
+	.dp-feature-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media screen and (max-width: 736px) {
+	.dp-feature-grid { grid-template-columns: 1fr; }
+	#dp-features { padding: 4em 1.5em; }
+}
+
+/* ============ How it works ============ */
+ 
+#dp-how-it-works {
+	background-color: var(--dp-bg-2);
+	padding: 3em 3em;
+}
+ 
+@media screen and (max-width: 736px) {
+	#dp-how-it-works { padding: 4em 1.5em; }
+}
+
+/* ============ Stats band ============ */
+
+#dp-stats {
+	background-color: var(--dp-bg-1);
+	padding: 4em 3em;
+}
+
+	.dp-stats-row {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 2em;
+		max-width: 80em;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.dp-stat .dp-stat-num {
+		font-size: 2.25em;
+		font-weight: 300;
+		color: var(--dp-accent-light);
+		display: block;
+		margin-bottom: 0.15em;
+	}
+
+	.dp-stat .dp-stat-label {
+		font-size: 0.8em;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--dp-text-soft);
+	}
+
+@media screen and (max-width: 736px) {
+	.dp-stats-row { grid-template-columns: 1fr 1fr; gap: 2.5em 1.5em; }
+}
+
+/* ============ Video ============ */
+
+#dp-video {
+	background-color: var(--dp-bg-4);
+	padding: 5em 3em 0 3em;
+	text-align: center;
+}
+
+	.dp-video-inner {
+		max-width: 50em;
+		margin: 0 auto;
+	}
+
+	.dp-video-frame {
+		position: relative;
+		width: 100%;
+		padding-top: 56.25%; /* 16:9 */
+		border-radius: 6px;
+		overflow: hidden;
+		box-shadow: 0 0.5em 1.5em rgba(0,0,0,0.35);
+	}
+
+	.dp-video-frame iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+
+@media screen and (max-width: 736px) {
+	#dp-video { padding: 3.5em 1.5em 0 1.5em; }
+}
+
+/* ============ Testimonial ============ */
+
+#dp-testimonial {
+	background-color: var(--dp-bg-4);
+	padding: 5em 3em;
+	text-align: center;
+}
+
+	.dp-testimonial-inner {
+		max-width: 44em;
+		margin: 0 auto;
+	}
+
+	#dp-testimonial blockquote {
+		font-size: 1.4em;
+		font-weight: 300;
+		line-height: 1.5;
+		margin-bottom: 1.25em;
+	}
+
+	.dp-testimonial-attrib {
+		color: var(--dp-text-soft);
+		font-size: 0.85em;
+		letter-spacing: 0.05em;
+	}
+
+/* ============ FAQ ============ */
+ 
+#dp-faq {
+	background-color: var(--dp-bg-3);
+	padding: 3em 3em;
+}
+ 
+	.dp-faq-list {
+		max-width: 44em;
+		margin: 0 auto;
+	}
+ 
+	.dp-faq-item {
+		background-color: rgba(255,255,255,0.03);
+		border: 1px solid rgba(255,255,255,0.08);
+		border-radius: 6px;
+		padding: 0 1.75em;
+		margin-bottom: 1em;
+	}
+ 
+	.dp-faq-item summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5em;
+		padding: 1.25em 0;
+		cursor: pointer;
+		font-weight: 600;
+		font-size: 1.05em;
+		list-style: none;
+		text-align: left;
+	}
+ 
+	/* hide the default disclosure triangle across browsers */
+	.dp-faq-item summary::-webkit-details-marker { display: none; }
+	.dp-faq-item summary::marker { content: ""; }
+ 
+	.dp-faq-item summary .dp-faq-toggle {
+		flex-shrink: 0;
+		width: 1.5em;
+		height: 1.5em;
+		border-radius: 50%;
+		background-color: rgba(var(--dp-accent-rgb), 0.15);
+		color: var(--dp-accent-light);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.9em;
+		position: relative;
+	}
+ 
+	.dp-faq-item summary .dp-faq-toggle:before,
+	.dp-faq-item summary .dp-faq-toggle:after {
+		content: "";
+		position: absolute;
+		background-color: var(--dp-accent-light);
+		transition: transform 0.2s ease;
+	}
+ 
+	.dp-faq-item summary .dp-faq-toggle:before {
+		width: 0.65em;
+		height: 2px;
+	}
+ 
+	.dp-faq-item summary .dp-faq-toggle:after {
+		width: 2px;
+		height: 0.65em;
+	}
+ 
+	.dp-faq-item[open] summary .dp-faq-toggle:after {
+		transform: rotate(90deg);
+		opacity: 0;
+	}
+ 
+	.dp-faq-item .dp-faq-answer {
+		color: var(--dp-text-soft);
+		padding: 0 0 1.5em 0;
+		max-width: 38em;
+	}
+ 
+@media screen and (max-width: 736px) {
+	#dp-faq { padding: 4em 1.5em; }
+}
+
+/* ============ Final CTA ============ */
+
+#dp-cta {
+	background-color: var(--dp-bg-1);
+	padding: 5em 3em;
+	text-align: center;
+}
+
+	#dp-cta h2 {
+		font-size: 1.75em;
+		font-weight: 300;
+		margin-bottom: 0.4em;
+	}
+
+	#dp-cta p {
+		color: var(--dp-text-soft);
+		margin-bottom: 1.75em;
+	}

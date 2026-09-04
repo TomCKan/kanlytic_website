@@ -1,0 +1,891 @@
+/* ============================================================
+   DATA PRODUCT THEMES
+   ============================================================
+
+   Load order:
+       1. main.css (Forty)
+       2. data-product.css
+       3. data-product-themes.css
+
+   Purpose:
+       - Keep the main Forty header / navigation / menu unchanged.
+       - Provide light, reusable colour themes for product pages.
+       - Change product identity by adding one class to .dp-page:
+             .dp-blue
+             .dp-green
+             .dp-orange
+             .dp-purple
+             .dp-teal
+
+   Example:
+       <body class="dp-page dp-blue">
+
+   IMPORTANT:
+       This file intentionally does NOT style #header or #menu.
+       Those should continue to inherit their colours from main.css.
+   ============================================================ */
+
+
+/* ============================================================
+   THEME TOKENS
+   ============================================================
+
+   Each theme defines the same variables.
+
+   --dp-bg-1      Primary white background
+   --dp-bg-2      Very pale product-tinted background
+   --dp-bg-3      Stronger pale product-tinted background
+   --dp-bg-4      White / near-white background
+
+   --dp-accent        Main product colour
+   --dp-accent-light  Hover / secondary product colour
+   --dp-accent-active Active / pressed product colour
+   --dp-accent-rgb    RGB values for rgba() usage
+
+   --dp-text          Main text
+   --dp-text-soft     Secondary text
+   ============================================================ */
+
+
+/* ============================================================
+   BLUE (for finance & accounting)
+   ============================================================ */
+
+.dp-page.dp-blue {
+	--dp-bg-1: #ffffff;
+	--dp-bg-2: #f2f6fb;
+	--dp-bg-3: #e6eef8;
+	--dp-bg-4: #ffffff;
+
+	--dp-accent: #052245;
+	--dp-accent-light: #133053;
+	--dp-accent-active: #001835;
+
+	--dp-text: #1b1b1b;
+	--dp-text-soft: rgba(27, 27, 27, 0.934);
+
+	--dp-accent-rgb: 5,34,69;
+}
+
+
+/* ============================================================
+   GREEN
+   ============================================================ */
+
+.dp-page.dp-green {
+	--dp-bg-1: #ffffff;
+	--dp-bg-2: #f2f8f5;
+	--dp-bg-3: #e4f1ea;
+	--dp-bg-4: #ffffff;
+
+	--dp-accent: #174d35;
+	--dp-accent-light: #286b4b;
+	--dp-accent-active: #0d3825;
+
+	--dp-text: #1b1b1b;
+	--dp-text-soft: rgba(27,27,27,0.68);
+
+	--dp-accent-rgb: 23,77,53;
+}
+
+
+/* ============================================================
+   ORANGE
+   ============================================================ */
+
+.dp-page.dp-orange {
+	--dp-bg-1: #ffffff;
+	--dp-bg-2: #fff7ed;
+	--dp-bg-3: #ffd4b7;
+	--dp-bg-4: #ffffff;
+
+	--dp-accent: #7a3e08;
+	--dp-accent-light: #a85a12;
+	--dp-accent-active: #572a04;
+
+	--dp-text: #1b1b1b;
+	--dp-text-soft: rgba(27,27,27,0.68);
+
+	--dp-accent-rgb: 122,62,8;
+}
+
+
+/* ============================================================
+   PURPLE (marketing?)
+   ============================================================ */
+
+.dp-page.dp-purple {
+	--dp-bg-1: #ffffff;
+	--dp-bg-2: #f7f3fb;
+	--dp-bg-3: #eee6f6;
+	--dp-bg-4: #ffffff;
+
+	--dp-accent: #4b286d;
+	--dp-accent-light: #6b3f91;
+	--dp-accent-active: #35194f;
+
+	--dp-text: #1b1b1b;
+	--dp-text-soft: rgba(27,27,27,0.68);
+
+	--dp-accent-rgb: 75,40,109;
+}
+
+
+/* ============================================================
+   TEAL (for recruiters?)
+   ============================================================ */
+
+.dp-page.dp-teal {
+	--dp-bg-1: #ffffff;
+	--dp-bg-2: #f0f8f8;
+	--dp-bg-3: #e0f0f0;
+	--dp-bg-4: #ffffff;
+
+	--dp-accent: #15565a;
+	--dp-accent-light: #23757a;
+	--dp-accent-active: #0c3d40;
+
+	--dp-text: #1b1b1b;
+	--dp-text-soft: rgba(27,27,27,0.68);
+
+	--dp-accent-rgb: 21,86,90;
+}
+
+
+/* ============================================================
+   DEEP YELLOW
+   ============================================================ */
+
+.dp-page.dp-yellow {
+	--dp-bg-1: #ffffff;
+	--dp-bg-2: #fff7ed;
+	--dp-bg-3: #fceddc;
+	--dp-bg-4: #ffffff;
+
+	--dp-accent: #6b5200;
+	--dp-accent-light: #e1b800;
+	--dp-accent-active: #4b3900;
+
+	--dp-text: #1b1b1b;
+	--dp-text-soft: rgba(27,27,27,0.68);
+
+	--dp-accent-rgb: 107,82,0;
+}
+
+
+/* ============================================================
+   RED (for recruiters?)
+   ============================================================ */
+
+.dp-page.dp-red {
+	--dp-bg-1: #ffffff;
+	--dp-bg-2: #fdf3f3;
+	--dp-bg-3: #f8e2e2;
+	--dp-bg-4: #ffffff;
+
+	--dp-accent: #7a2020;
+	--dp-accent-light: #a73535;
+	--dp-accent-active: #571313;
+
+	--dp-text: #1b1b1b;
+	--dp-text-soft: rgba(27,27,27,0.68);
+
+	--dp-accent-rgb: 122,32,32;
+}
+
+
+/* ============================================================
+   SALMON
+   ============================================================ */
+
+.dp-page.dp-salmon {
+	--dp-bg-1: #ffffff;
+	--dp-bg-2: #fdf3f3;
+	--dp-bg-3: #ffd4b7;
+	--dp-bg-4: #ffffff;
+
+	--dp-accent: #7a2020;
+	--dp-accent-light: #a73535;
+	--dp-accent-active: #571313;
+
+	--dp-text: #1b1b1b;
+	--dp-text-soft: rgba(27,27,27,0.68);
+
+	--dp-accent-rgb: 122,32,32;
+}
+
+
+/* ============================================================
+   DEEP ORANGE (marketing?)
+   ============================================================ */
+
+.dp-page.dp-deep-orange {
+	--dp-bg-1: #ffffff;
+	--dp-bg-2: #fff4eb;
+	--dp-bg-3: #f9dfca;
+	--dp-bg-4: #ffffff;
+
+	--dp-accent: #8a3500;
+	--dp-accent-light: #b54d0a;
+	--dp-accent-active: #5f2300;
+
+	--dp-text: #1b1b1b;
+	--dp-text-soft: rgba(27, 27, 27, 0.911);
+
+	--dp-accent-rgb: 138,53,0;
+}
+
+
+/* ============================================================
+   NAVY + GOLD (for international/non-sector specific)
+   ============================================================ */
+
+.dp-page.dp-navy-gold {
+	--dp-bg-1: #ffffff;
+	--dp-bg-2: #f7f7f2;
+	--dp-bg-3: #eeeade;
+	--dp-bg-4: #ffffff;
+
+	--dp-accent: #8a6810;
+	--dp-accent-light: #b18a24;
+	--dp-accent-active: #604805;
+
+	--dp-text: #1b1b1b;
+	--dp-text-soft: rgba(27, 27, 27, 0.927);
+
+	--dp-accent-rgb: 138,104,16;
+}
+
+
+/* ============================================================
+   PRODUCT CONTENT — GLOBAL TEXT
+   ============================================================
+
+   Deliberately scoped to the product sections rather than
+   using .dp-page a / .dp-page p globally.
+
+   This prevents the theme stylesheet from accidentally
+   recolouring the Forty header, navigation or menu.
+   ============================================================ */
+
+.dp-page #dp-hero,
+.dp-page #dp-logos,
+.dp-page #dp-features,
+.dp-page #dp-how-it-works,
+.dp-page #dp-stats,
+.dp-page #dp-video,
+.dp-page #dp-testimonial,
+.dp-page #dp-faq,
+.dp-page #dp-cta {
+	color: var(--dp-text);
+}
+
+.dp-page #dp-hero h1,
+.dp-page #dp-hero h2,
+.dp-page #dp-hero h3,
+.dp-page #dp-hero h4,
+.dp-page #dp-hero h5,
+.dp-page #dp-hero h6,
+.dp-page #dp-logos h1,
+.dp-page #dp-logos h2,
+.dp-page #dp-logos h3,
+.dp-page #dp-logos h4,
+.dp-page #dp-logos h5,
+.dp-page #dp-logos h6,
+.dp-page #dp-features h1,
+.dp-page #dp-features h2,
+.dp-page #dp-features h3,
+.dp-page #dp-features h4,
+.dp-page #dp-features h5,
+.dp-page #dp-features h6,
+.dp-page #dp-how-it-works h1,
+.dp-page #dp-how-it-works h2,
+.dp-page #dp-how-it-works h3,
+.dp-page #dp-how-it-works h4,
+.dp-page #dp-how-it-works h5,
+.dp-page #dp-how-it-works h6,
+.dp-page #dp-stats h1,
+.dp-page #dp-stats h2,
+.dp-page #dp-stats h3,
+.dp-page #dp-stats h4,
+.dp-page #dp-stats h5,
+.dp-page #dp-stats h6,
+.dp-page #dp-video h1,
+.dp-page #dp-video h2,
+.dp-page #dp-video h3,
+.dp-page #dp-video h4,
+.dp-page #dp-video h5,
+.dp-page #dp-video h6,
+.dp-page #dp-testimonial h1,
+.dp-page #dp-testimonial h2,
+.dp-page #dp-testimonial h3,
+.dp-page #dp-testimonial h4,
+.dp-page #dp-testimonial h5,
+.dp-page #dp-testimonial h6,
+.dp-page #dp-faq h1,
+.dp-page #dp-faq h2,
+.dp-page #dp-faq h3,
+.dp-page #dp-faq h4,
+.dp-page #dp-faq h5,
+.dp-page #dp-faq h6,
+.dp-page #dp-cta h1,
+.dp-page #dp-cta h2,
+.dp-page #dp-cta h3,
+.dp-page #dp-cta h4,
+.dp-page #dp-cta h5,
+.dp-page #dp-cta h6 {
+	color: var(--dp-text);
+}
+
+.dp-page #dp-hero p,
+.dp-page #dp-logos p,
+.dp-page #dp-features p,
+.dp-page #dp-how-it-works p,
+.dp-page #dp-stats p,
+.dp-page #dp-video p,
+.dp-page #dp-testimonial p,
+.dp-page #dp-faq p,
+.dp-page #dp-cta p {
+	color: var(--dp-text-soft);
+}
+
+.dp-page #dp-features strong,
+.dp-page #dp-features b,
+.dp-page #dp-how-it-works strong,
+.dp-page #dp-how-it-works b,
+.dp-page #dp-stats strong,
+.dp-page #dp-stats b,
+.dp-page #dp-video strong,
+.dp-page #dp-video b,
+.dp-page #dp-testimonial strong,
+.dp-page #dp-testimonial b,
+.dp-page #dp-faq strong,
+.dp-page #dp-faq b,
+.dp-page #dp-cta strong,
+.dp-page #dp-cta b {
+	color: var(--dp-text);
+}
+
+
+/* ============================================================
+   PRODUCT LINKS
+   ============================================================ */
+
+.dp-page #dp-hero a,
+.dp-page #dp-logos a,
+.dp-page #dp-features a,
+.dp-page #dp-how-it-works a,
+.dp-page #dp-stats a,
+.dp-page #dp-video a,
+.dp-page #dp-testimonial a,
+.dp-page #dp-faq a,
+.dp-page #dp-cta a {
+	color: var(--dp-accent);
+}
+
+.dp-page #dp-hero a:hover,
+.dp-page #dp-logos a:hover,
+.dp-page #dp-features a:hover,
+.dp-page #dp-how-it-works a:hover,
+.dp-page #dp-stats a:hover,
+.dp-page #dp-video a:hover,
+.dp-page #dp-testimonial a:hover,
+.dp-page #dp-faq a:hover,
+.dp-page #dp-cta a:hover {
+	color: var(--dp-accent-light) !important;
+}
+
+.dp-page #dp-hero a:active,
+.dp-page #dp-logos a:active,
+.dp-page #dp-features a:active,
+.dp-page #dp-how-it-works a:active,
+.dp-page #dp-stats a:active,
+.dp-page #dp-video a:active,
+.dp-page #dp-testimonial a:active,
+.dp-page #dp-faq a:active,
+.dp-page #dp-cta a:active {
+	color: var(--dp-accent-active) !important;
+}
+
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.dp-page #dp-hero {
+	background-color: var(--dp-bg-1);
+}
+
+.dp-page #dp-hero .dp-eyebrow {
+	color: var(--dp-accent);
+}
+
+.dp-page #dp-hero .dp-hero-copy > p {
+	color: var(--dp-text-soft);
+}
+
+
+/* ============================================================
+   LOGO STRIP
+   ============================================================ */
+
+.dp-page #dp-logos {
+	background-color: var(--dp-bg-2);
+}
+
+.dp-page #dp-logos p {
+	color: var(--dp-text-soft);
+}
+
+.dp-page #dp-logos .dp-logo-slot {
+	color: var(--dp-text-soft);
+	border-color: rgba(var(--dp-accent-rgb), 0.16);
+}
+
+
+/* ============================================================
+   FEATURE GRID
+   ============================================================ */
+
+.dp-page #dp-features {
+	background-color: var(--dp-bg-3);
+}
+
+.dp-page #dp-features .dp-section-head p,
+.dp-page #dp-features .dp-section-head-two p {
+	color: var(--dp-text-soft);
+}
+
+.dp-page #dp-features .dp-feature {
+	background-color: #ffffff !important;
+	border: 1px solid rgba(var(--dp-accent-rgb), 0.14) !important;
+	color: var(--dp-text);
+}
+
+.dp-page #dp-features .dp-feature h3 {
+	color: var(--dp-text);
+}
+
+.dp-page #dp-features .dp-feature p {
+	color: var(--dp-text-soft);
+}
+
+.dp-page #dp-features .dp-feature:hover {
+	border-color: rgba(var(--dp-accent-rgb), 0.38) !important;
+}
+
+.dp-page #dp-features .dp-feature .dp-icon {
+	background-color: rgba(var(--dp-accent-rgb), 0.10);
+	color: var(--dp-accent);
+}
+
+
+/* ============================================================
+   HOW IT WORKS
+   ============================================================ */
+
+.dp-page #dp-how-it-works {
+	background-color: var(--dp-bg-2);
+}
+
+.dp-page #dp-how-it-works p {
+	color: var(--dp-text-soft);
+}
+
+
+/* ============================================================
+   STATS
+   ============================================================ */
+
+.dp-page #dp-stats {
+	background-color: var(--dp-bg-1);
+}
+
+.dp-page #dp-stats .dp-stat-num {
+	color: var(--dp-accent);
+}
+
+.dp-page #dp-stats .dp-stat-label {
+	color: var(--dp-text-soft);
+}
+
+
+/* ============================================================
+   VIDEO
+   ============================================================ */
+
+.dp-page #dp-video {
+	background-color: var(--dp-bg-4);
+}
+
+.dp-page #dp-video p {
+	color: var(--dp-text-soft);
+}
+
+.dp-page #dp-video .dp-video-frame {
+	border: 1px solid rgba(var(--dp-accent-rgb), 0.12);
+}
+
+
+/* ============================================================
+   TESTIMONIAL
+   ============================================================ */
+
+.dp-page #dp-testimonial {
+	background-color: var(--dp-bg-4);
+}
+
+.dp-page #dp-testimonial blockquote {
+	color: var(--dp-text);
+}
+
+.dp-page #dp-testimonial .dp-testimonial-attrib {
+	color: var(--dp-text-soft);
+}
+
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+
+.dp-page #dp-faq {
+	background-color: var(--dp-bg-3);
+}
+
+.dp-page #dp-faq .dp-faq-item {
+	background-color: #ffffff !important;
+	border: 1px solid rgba(var(--dp-accent-rgb), 0.14) !important;
+	color: var(--dp-text);
+}
+
+.dp-page #dp-faq .dp-faq-item:hover {
+	border-color: rgba(var(--dp-accent-rgb), 0.38) !important;
+}
+
+.dp-page #dp-faq .dp-faq-item summary {
+	color: var(--dp-text);
+}
+
+.dp-page #dp-faq .dp-faq-item .dp-faq-answer {
+	color: var(--dp-text-soft);
+}
+
+.dp-page #dp-faq .dp-faq-item summary .dp-faq-toggle {
+	background-color: rgba(var(--dp-accent-rgb), 0.10);
+	color: var(--dp-accent);
+}
+
+.dp-page #dp-faq .dp-faq-item summary .dp-faq-toggle:before,
+.dp-page #dp-faq .dp-faq-item summary .dp-faq-toggle:after {
+	background-color: var(--dp-accent);
+}
+
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+
+.dp-page #dp-cta {
+	background-color: var(--dp-bg-1);
+}
+
+.dp-page #dp-cta p {
+	color: var(--dp-text-soft);
+}
+
+
+/* ============================================================
+   PLACEHOLDER IMAGES
+   ============================================================ */
+
+.dp-page .dp-placeholder {
+	color: var(--dp-text-soft);
+	background: linear-gradient(
+		135deg,
+		var(--dp-bg-3),
+		var(--dp-bg-4)
+	);
+	border-color: rgba(var(--dp-accent-rgb), 0.20);
+}
+
+
+/* ============================================================
+   PRODUCT BUTTONS
+   ============================================================
+
+   These apply only to buttons inside the product content.
+   The Forty header/menu are deliberately excluded.
+   ============================================================ */
+
+.dp-page #dp-hero input[type="submit"].primary,
+.dp-page #dp-hero input[type="reset"].primary,
+.dp-page #dp-hero input[type="button"].primary,
+.dp-page #dp-hero button.primary,
+.dp-page #dp-hero .button.primary,
+.dp-page #dp-logos input[type="submit"].primary,
+.dp-page #dp-logos input[type="reset"].primary,
+.dp-page #dp-logos input[type="button"].primary,
+.dp-page #dp-logos button.primary,
+.dp-page #dp-logos .button.primary,
+.dp-page #dp-features input[type="submit"].primary,
+.dp-page #dp-features input[type="reset"].primary,
+.dp-page #dp-features input[type="button"].primary,
+.dp-page #dp-features button.primary,
+.dp-page #dp-features .button.primary,
+.dp-page #dp-how-it-works input[type="submit"].primary,
+.dp-page #dp-how-it-works input[type="reset"].primary,
+.dp-page #dp-how-it-works input[type="button"].primary,
+.dp-page #dp-how-it-works button.primary,
+.dp-page #dp-how-it-works .button.primary,
+.dp-page #dp-stats input[type="submit"].primary,
+.dp-page #dp-stats input[type="reset"].primary,
+.dp-page #dp-stats input[type="button"].primary,
+.dp-page #dp-stats button.primary,
+.dp-page #dp-stats .button.primary,
+.dp-page #dp-video input[type="submit"].primary,
+.dp-page #dp-video input[type="reset"].primary,
+.dp-page #dp-video input[type="button"].primary,
+.dp-page #dp-video button.primary,
+.dp-page #dp-video .button.primary,
+.dp-page #dp-testimonial input[type="submit"].primary,
+.dp-page #dp-testimonial input[type="reset"].primary,
+.dp-page #dp-testimonial input[type="button"].primary,
+.dp-page #dp-testimonial button.primary,
+.dp-page #dp-testimonial .button.primary,
+.dp-page #dp-faq input[type="submit"].primary,
+.dp-page #dp-faq input[type="reset"].primary,
+.dp-page #dp-faq input[type="button"].primary,
+.dp-page #dp-faq button.primary,
+.dp-page #dp-faq .button.primary,
+.dp-page #dp-cta input[type="submit"].primary,
+.dp-page #dp-cta input[type="reset"].primary,
+.dp-page #dp-cta input[type="button"].primary,
+.dp-page #dp-cta button.primary,
+.dp-page #dp-cta .button.primary {
+	background-color: var(--dp-accent);
+	color: #ffffff;
+	box-shadow: none;
+}
+
+.dp-page #dp-hero button.primary:hover,
+.dp-page #dp-hero .button.primary:hover,
+.dp-page #dp-logos button.primary:hover,
+.dp-page #dp-logos .button.primary:hover,
+.dp-page #dp-features button.primary:hover,
+.dp-page #dp-features .button.primary:hover,
+.dp-page #dp-how-it-works button.primary:hover,
+.dp-page #dp-how-it-works .button.primary:hover,
+.dp-page #dp-stats button.primary:hover,
+.dp-page #dp-stats .button.primary:hover,
+.dp-page #dp-video button.primary:hover,
+.dp-page #dp-video .button.primary:hover,
+.dp-page #dp-testimonial button.primary:hover,
+.dp-page #dp-testimonial .button.primary:hover,
+.dp-page #dp-faq button.primary:hover,
+.dp-page #dp-faq .button.primary:hover,
+.dp-page #dp-cta button.primary:hover,
+.dp-page #dp-cta .button.primary:hover {
+	background-color: var(--dp-accent-light);
+	color: #ffffff !important;
+}
+
+.dp-page #dp-hero button.primary:active,
+.dp-page #dp-hero .button.primary:active,
+.dp-page #dp-logos button.primary:active,
+.dp-page #dp-logos .button.primary:active,
+.dp-page #dp-features button.primary:active,
+.dp-page #dp-features .button.primary:active,
+.dp-page #dp-how-it-works button.primary:active,
+.dp-page #dp-how-it-works .button.primary:active,
+.dp-page #dp-stats button.primary:active,
+.dp-page #dp-stats .button.primary:active,
+.dp-page #dp-video button.primary:active,
+.dp-page #dp-video .button.primary:active,
+.dp-page #dp-testimonial button.primary:active,
+.dp-page #dp-testimonial .button.primary:active,
+.dp-page #dp-faq button.primary:active,
+.dp-page #dp-faq .button.primary:active,
+.dp-page #dp-cta button.primary:active,
+.dp-page #dp-cta .button.primary:active {
+	background-color: var(--dp-accent-active);
+}
+
+
+/* ============================================================
+   FORMS — PRODUCT CONTENT ONLY
+   ============================================================ */
+
+.dp-page #dp-hero input[type="text"],
+.dp-page #dp-hero input[type="password"],
+.dp-page #dp-hero input[type="email"],
+.dp-page #dp-hero input[type="tel"],
+.dp-page #dp-hero input[type="search"],
+.dp-page #dp-hero input[type="url"],
+.dp-page #dp-hero select,
+.dp-page #dp-hero textarea,
+.dp-page #dp-how-it-works input[type="text"],
+.dp-page #dp-how-it-works input[type="password"],
+.dp-page #dp-how-it-works input[type="email"],
+.dp-page #dp-how-it-works input[type="tel"],
+.dp-page #dp-how-it-works input[type="search"],
+.dp-page #dp-how-it-works input[type="url"],
+.dp-page #dp-how-it-works select,
+.dp-page #dp-how-it-works textarea,
+.dp-page #dp-cta input[type="text"],
+.dp-page #dp-cta input[type="password"],
+.dp-page #dp-cta input[type="email"],
+.dp-page #dp-cta input[type="tel"],
+.dp-page #dp-cta input[type="search"],
+.dp-page #dp-cta input[type="url"],
+.dp-page #dp-cta select,
+.dp-page #dp-cta textarea {
+	color: var(--dp-text);
+	background-color: rgba(var(--dp-accent-rgb), 0.025);
+	border-color: rgba(var(--dp-accent-rgb), 0.16);
+}
+
+.dp-page #dp-hero input[type="text"]:focus,
+.dp-page #dp-hero input[type="password"]:focus,
+.dp-page #dp-hero input[type="email"]:focus,
+.dp-page #dp-hero input[type="tel"]:focus,
+.dp-page #dp-hero input[type="search"]:focus,
+.dp-page #dp-hero input[type="url"]:focus,
+.dp-page #dp-hero select:focus,
+.dp-page #dp-hero textarea:focus,
+.dp-page #dp-how-it-works input[type="text"]:focus,
+.dp-page #dp-how-it-works input[type="password"]:focus,
+.dp-page #dp-how-it-works input[type="email"]:focus,
+.dp-page #dp-how-it-works input[type="tel"]:focus,
+.dp-page #dp-how-it-works input[type="search"]:focus,
+.dp-page #dp-how-it-works input[type="url"]:focus,
+.dp-page #dp-how-it-works select:focus,
+.dp-page #dp-how-it-works textarea:focus,
+.dp-page #dp-cta input[type="text"]:focus,
+.dp-page #dp-cta input[type="password"]:focus,
+.dp-page #dp-cta input[type="email"]:focus,
+.dp-page #dp-cta input[type="tel"]:focus,
+.dp-page #dp-cta input[type="search"]:focus,
+.dp-page #dp-cta input[type="url"]:focus,
+.dp-page #dp-cta select:focus,
+.dp-page #dp-cta textarea:focus {
+	border-color: var(--dp-accent);
+	box-shadow: 0 0 0 2px rgba(var(--dp-accent-rgb), 0.18);
+}
+
+.dp-page #dp-hero select option,
+.dp-page #dp-how-it-works select option,
+.dp-page #dp-cta select option {
+	color: var(--dp-text);
+	background-color: var(--dp-bg-1);
+}
+
+
+/* ============================================================
+   LABELS
+   ============================================================ */
+
+.dp-page #dp-hero label,
+.dp-page #dp-how-it-works label,
+.dp-page #dp-cta label {
+	color: var(--dp-text);
+}
+
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+
+.dp-page #dp-hero table,
+.dp-page #dp-hero th,
+.dp-page #dp-hero td,
+.dp-page #dp-logos table,
+.dp-page #dp-logos th,
+.dp-page #dp-logos td,
+.dp-page #dp-features table,
+.dp-page #dp-features th,
+.dp-page #dp-features td,
+.dp-page #dp-how-it-works table,
+.dp-page #dp-how-it-works th,
+.dp-page #dp-how-it-works td,
+.dp-page #dp-stats table,
+.dp-page #dp-stats th,
+.dp-page #dp-stats td,
+.dp-page #dp-video table,
+.dp-page #dp-video th,
+.dp-page #dp-video td,
+.dp-page #dp-testimonial table,
+.dp-page #dp-testimonial th,
+.dp-page #dp-testimonial td,
+.dp-page #dp-faq table,
+.dp-page #dp-faq th,
+.dp-page #dp-faq td,
+.dp-page #dp-cta table,
+.dp-page #dp-cta th,
+.dp-page #dp-cta td {
+	color: var(--dp-text);
+}
+
+
+/* ============================================================
+   CODE / PRE
+   ============================================================ */
+
+.dp-page #dp-hero code,
+.dp-page #dp-hero pre,
+.dp-page #dp-features code,
+.dp-page #dp-features pre,
+.dp-page #dp-how-it-works code,
+.dp-page #dp-how-it-works pre,
+.dp-page #dp-video code,
+.dp-page #dp-video pre,
+.dp-page #dp-cta code,
+.dp-page #dp-cta pre {
+	color: var(--dp-text);
+}
+
+
+/* ============================================================
+   PRODUCT ICONS
+   ============================================================ */
+
+.dp-page #dp-hero .icon,
+.dp-page #dp-logos .icon,
+.dp-page #dp-features .icon,
+.dp-page #dp-how-it-works .icon,
+.dp-page #dp-stats .icon,
+.dp-page #dp-video .icon,
+.dp-page #dp-testimonial .icon,
+.dp-page #dp-faq .icon,
+.dp-page #dp-cta .icon {
+	color: var(--dp-accent);
+}
+
+
+/* ============================================================
+   DIVIDERS / RULES
+   ============================================================ */
+
+.dp-page #dp-hero hr,
+.dp-page #dp-logos hr,
+.dp-page #dp-features hr,
+.dp-page #dp-how-it-works hr,
+.dp-page #dp-stats hr,
+.dp-page #dp-video hr,
+.dp-page #dp-testimonial hr,
+.dp-page #dp-faq hr,
+.dp-page #dp-cta hr {
+	border-bottom-color: rgba(var(--dp-accent-rgb), 0.18);
+}
+
+
+/* ============================================================
+   OPTIONAL PRODUCT FOOTER
+   ============================================================ */
+
+.dp-page footer {
+	color: var(--dp-text);
+}
+
+.dp-page footer p {
+	color: var(--dp-text-soft);
+}
